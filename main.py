@@ -94,8 +94,8 @@ while True:
     print("Groesse des Ordners: " + str(convert_bytes(foldercmplte)))
     print("[0] - Einen Order zurueck")
     for w in range(len(d)):
-        prozent = (fsizesbyte[w]/foldercmplte*1.00)
-        folderview.append(str(convert_bytes(fsizesbyte[w])) + "       \t" + str(prozent)+ "       \t" + str(d[w]))
+        prozent = ((fsizesbyte[w]*1.00)/(foldercmplte*1.00))*100
+        folderview.append(str(convert_bytes(fsizesbyte[w])) + "       \t" + str(prozent)+ "%       \t" + str(d[w]))
     ttt = creategui(folderview)
     grandparent = str(d[ttt - 1])
     
