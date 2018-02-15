@@ -68,17 +68,6 @@ def FolderSize(name):
                 h = 1
     return size
 
-size = FolderSize("D:\\Videos")
-
-#DEBUGSHIT
-print("-----")
-print(size)
-print("-----")
-size /= 1024
-size /= 1024
-size /= 1024
-print(size)
-
 from glob import glob
 grandparent = raw_input("Ordner angeben:")
 
@@ -94,8 +83,9 @@ while True:
     print("Groesse des Ordners: " + str(convert_bytes(foldercmplte)))
     print("[0] - Einen Order zurueck")
     for w in range(len(d)):
+		if (fsizesbyte[w] < 1024) fsizesbyte[w] = 0
         prozent = ((fsizesbyte[w]*1.00)/(foldercmplte*1.00))*100
-        folderview.append(str(convert_bytes(fsizesbyte[w])) + "       \t" + str(prozent)+ "%       \t" + str(d[w]))
+        folderview.append(str(convert_bytes(fsizesbyte[w])) + "       \t" + str(prozent)[:5] + "%       \t" + str(d[w]))
     ttt = creategui(folderview)
     grandparent = str(d[ttt - 1])
     
