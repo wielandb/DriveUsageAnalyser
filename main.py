@@ -5,6 +5,7 @@ import time
 def status(s):
     sys.stdout.write(s + " " * (78 - len(s)) + "\r")
 
+allsize = 0 
 
 import os, sys, math, random
 def creategui(arglist,clear=False,backbone=False):
@@ -54,14 +55,16 @@ def convert_bytes(num):
 def FolderSize(name):
     size = 0
     errors = 0
+    global allsize
     for d,r,f in os.walk(name):
-        status(str(convert_bytes(size)))
+        status(str(convert_bytes(allsize)))
         for a in f:
             j = 0
             #print(str(d) + "\\" + str(a))
             try:
                 statinfo = os.stat(str(d) + "\\" + str(a))
                 size += statinfo.st_size
+                allsize += statinfo.st_size
             except WindowsError:
                 errors += 1
             finally:
@@ -75,7 +78,10 @@ while True:
     d = glob(grandparent + "\\*\\")
     fsizesbyte = []
     for t in d:
-        fsizesbyte.append(FolderSize(t))
+        nsd = FolderSize(t)
+        if (nsd < 1020):
+           nsd = 0
+        fsizesbyte.append(nsd)
     folderview = []
     foldercmplte = 0
     for i in fsizesbyte:
@@ -83,7 +89,6 @@ while True:
     print("Groesse des Ordners: " + str(convert_bytes(foldercmplte)))
     print("[0] - Einen Order zurueck")
     for w in range(len(d)):
-		if (fsizesbyte[w] < 1024) fsizesbyte[w] = 0
         prozent = ((fsizesbyte[w]*1.00)/(foldercmplte*1.00))*100
         folderview.append(str(convert_bytes(fsizesbyte[w])) + "       \t" + str(prozent)[:5] + "%       \t" + str(d[w]))
     ttt = creategui(folderview)
