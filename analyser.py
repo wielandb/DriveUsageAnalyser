@@ -93,5 +93,4 @@ while True:
         folderview.append(str(convert_bytes(fsizesbyte[w])) + "       \t" + str(prozent)[:5] + "%       \t" + str(d[w]))
     ttt = creategui(folderview)
     allsize = 0
-	grandparent = str(d[ttt - 1])
-    
+    grandparent = str(d[ttt - 1])
